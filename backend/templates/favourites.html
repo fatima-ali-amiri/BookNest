@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Favourite Books | BookNest</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f1ea;
+            margin: 0;
+            padding: 30px;
+            color: #263238;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        header {
+            background: #263238;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .books {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+            margin-top: 25px;
+        }
+
+        .book {
+            background: white;
+            padding: 20px;
+            border-radius: 13px;
+            box-shadow: 0 3px 12px #00000012;
+        }
+
+        .cover-area {
+            height: 220px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f7f7f7;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .book-cover {
+            max-width: 100%;
+            max-height: 210px;
+            object-fit: contain;
+        }
+
+        h3 {
+            color: #354f52;
+            line-height: 1.4;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        button {
+            background: #a83250;
+            color: white;
+            border: none;
+            padding: 11px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 18px;
+            background: #263238;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        .empty-message {
+            background: white;
+            padding: 30px;
+            margin-top: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>❤️ My Favourite Books</h1>
+        <p>Your personal book collection</p>
+    </header>
+
+    {% if books %}
+
+        <div class="books">
+
+            {% for book in books %}
+
+                <div class="book">
+
+                    <div class="cover-area">
+
+                        {% if book["Image_URL"] %}
+                            <img
+                                src="{{ book['Image_URL'] }}"
+                                alt="{{ book['Title'] }}"
+                                class="book-cover"
+                                loading="lazy"
+                            >
+                        {% else %}
+                            Cover not available
+                        {% endif %}
+
+                    </div>
+
+                    <h3>{{ book["Title"] }}</h3>
+
+                    <p>
+                        <strong>Category:</strong>
+                        {{ book["Category"] }}
+                    </p>
+
+                    <p>
+                        <strong>Price:</strong>
+                        {{ book["Price"] }}
+                    </p>
+
+                    <p>
+                        <strong>Rating:</strong>
+                        {{ book["Rating"] }}
+                    </p>
+
+                    <form
+                        action="{{ url_for('toggle_favourite', book_id=book['Book_ID']) }}"
+                        method="POST"
+                    >
+                        <button type="submit">
+                            ❤️ Remove Favourite
+                        </button>
+                    </form>
+
+                    <p>
+                        <a href="{{ url_for('book_details', book_id=book['Book_ID']) }}">
+                            View Book Details
+                        </a>
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-message">
+            <h2>No Favourite Books Yet!</h2>
+            <p>Explore BookNest and add books to your favourites.</p>
+        </div>
+
+    {% endif %}
+
+    <a href="/" class="back-button">← Back to Home</a>
+
+</div>
+
+</body>
+</html>
