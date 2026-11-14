@@ -1,208 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Georgia, 'Times New Roman', serif;
+        background: #f7f5ef;
+        margin: 0;
+        padding: 30px;
+        color: #263d32;
+    }
+
+    .container {
+        max-width: 1250px;
+        margin: auto;
+    }
+
+    header {
+        text-align: center;
+        background: linear-gradient(135deg, #183d32, #315c49);
+        color: white;
+        padding: 55px 20px;
+        border-radius: 18px;
+        box-shadow: 0 8px 25px #183d3225;
+    }
+
+    header h1 {
+        font-size: 46px;
+        margin: 0 0 12px;
+        letter-spacing: 1px;
+    }
+
+    header p {
+        color: #e5eee7;
+        font-size: 17px;
+        letter-spacing: 1px;
+    }
+
+    .section-title {
+        margin-top: 40px;
+        color: #183d32;
+        font-size: 28px;
+    }
+
+    .search-form {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 22px;
+        padding: 22px;
+        background: white;
+        border-radius: 14px;
+        box-shadow: 0 4px 18px #0000000c;
+    }
+
+    input, select {
+        padding: 13px;
+        flex: 1 1 180px;
+        min-width: 0;
+        border: 1px solid #d8dfd8;
+        border-radius: 9px;
+        font-size: 14px;
+        background: #fff;
+        color: #263d32;
+    }
+
+    input:focus, select:focus {
+        outline: 2px solid #71927c;
+        border-color: #315c49;
+    }
+
+    button {
+        padding: 13px 20px;
+        background: #244d3b;
+        color: white;
+        border: none;
+        border-radius: 9px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #183d32;
+        transform: translateY(-2px);
+    }
+
+    .clear-button {
+        display: inline-block;
+        padding: 12px 17px;
+        background: #e8eee8;
+        color: #244d3b;
+        text-decoration: none;
+        border-radius: 9px;
+        font-size: 14px;
+        transition: 0.2s;
+    }
+
+    .clear-button:hover {
+        background: #d7e4d9;
+    }
+
+    .book-count {
+        margin-top: 20px;
+        padding: 15px 20px;
+        background: #edf1e9;
+        border-radius: 10px;
+        color: #405c4b;
+        line-height: 1.9;
+    }
+
+    .books {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 24px;
+        margin-top: 25px;
+    }
+
+    .book {
+        background: white;
+        padding: 18px;
+        border-radius: 15px;
+        border: 1px solid #e8e9e1;
+        box-shadow: 0 5px 18px #0000000b;
+        transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .book:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 25px #183d3218;
+    }
+
+    .cover-area {
+        height: 235px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f3f1e9;
+        border-radius: 10px;
+        margin-bottom: 17px;
+        overflow: hidden;
+    }
+
+    .book-cover {
+        max-width: 100%;
+        max-height: 220px;
+        object-fit: contain;
+    }
+
+    .no-cover {
+        color: #789080;
+    }
+
+    .book h3 {
+        color: #244d3b;
+        font-size: 18px;
+        line-height: 1.4;
+        min-height: 50px;
+    }
+
+    .book p {
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        color: #58685e;
+        line-height: 1.7;
+    }
+
+    .book form {
+        margin: 12px 0;
+    }
+
+    .book form button {
+        width: 100%;
+    }
+
+    .category-label {
+        display: inline-block;
+        background: #e6eee5;
+        color: #285943;
+        padding: 6px 11px;
+        border-radius: 20px;
+        font-size: 12px;
+    }
+
+    .recommendation-section {
+        background: #eaf0e9;
+        padding: 26px;
+        border-radius: 17px;
+        margin-top: 38px;
+        border: 1px solid #dce6dc;
+    }
+
+    .recommendation-section h2 {
+        color: #183d32;
+        margin-top: 0;
+        font-size: 25px;
+    }
+
+    .recommendation-section > p {
+        color: #617467;
+        font-family: Arial, sans-serif;
+    }
+
+    .recommendation-section .book {
+        border: 1px solid #dce5df;
+    }
+
+    .empty-message {
+        background: white;
+        padding: 35px;
+        margin-top: 25px;
+        border-radius: 14px;
+        text-align: center;
+    }
+.hero-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    margin-top: 25px;
+    padding: 45px;
+    background: #eaf0e9;
+    border-radius: 18px;
+    min-height: 280px;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.hero-tag {
+    color: #52745e;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.hero-content h2 {
+    font-size: 42px;
+    line-height: 1.15;
+    color: #183d32;
+    margin: 18px 0;
+}
+
+.hero-content p {
+    font-family: Arial, sans-serif;
+    color: #58685e;
+    line-height: 1.8;
+}
+
+.hero-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 14px 23px;
+    background: #244d3b;
+    color: white;
+    text-decoration: none;
+    border-radius: 9px;
+}
+
+.hero-button:hover {
+    background: #183d32;
+}
+
+.hero-decoration {
+    text-align: center;
+    min-width: 180px;
+}
+
+.hero-decoration span {
+    font-size: 85px;
+}
+
+.hero-decoration p {
+    color: #315c49;
+    font-style: italic;
+}
+
+@media (max-width: 600px) {
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 28px 18px;
+    }
+
+    .hero-content h2 {
+        font-size: 32px;
+    }
+}
+    footer {
+        text-align: center;
+        margin-top: 55px;
+        padding: 25px;
+        color: #718176;
+        border-top: 1px solid #dfe5dc;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            padding: 14px;
+        }
+
+        header {
+            padding: 35px 15px;
+        }
+
+        header h1 {
+            font-size: 34px;
+        }
+
+        .section-title {
+            font-size: 23px;
+        }
+
+        .search-form {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        input, select, .search-form button,
+        .search-form .clear-button {
+            width: 100%;
+            text-align: center;
+        }
+
+        .books {
+            grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+            gap: 13px;
+        }
+
+        .book {
+            padding: 12px;
+        }
+
+        .cover-area {
+            height: 185px;
+        }
+
+        .book-cover {
+            max-height: 175px;
+        }
+    }
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>BookNest | Smart Book Discovery</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f1ea;
-            margin: 0;
-            padding: 30px;
-            color: #263238;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        header {
-            text-align: center;
-            background: #263238;
-            color: white;
-            padding: 35px 20px;
-            border-radius: 15px;
-        }
-
-        header h1 {
-            font-size: 36px;
-            margin: 0 0 10px;
-        }
-
-        header p {
-            color: #e0e0e0;
-        }
-
-        .section-title {
-            margin-top: 35px;
-        }
-
-        .search-form {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        input, select {
-            padding: 13px;
-            width: 220px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 15px;
-            background: white;
-        }
-
-        button {
-            padding: 13px 22px;
-            background: #263238;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #354f52;
-        }
-
-        .clear-button {
-            display: inline-block;
-            padding: 13px 18px;
-            background: #78909c;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-        }
-
-        .book-count {
-            margin-top: 20px;
-            color: #546e7a;
-            line-height: 1.8;
-        }
-
-        .books {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 22px;
-            margin-top: 25px;
-        }
-
-        .book {
-            background: white;
-            padding: 20px;
-            border-radius: 13px;
-            box-shadow: 0 3px 12px #00000012;
-            transition: transform 0.2s;
-        }
-
-        .book:hover {
-            transform: translateY(-5px);
-        }
-
-        .cover-area {
-            height: 220px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #f7f7f7;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            overflow: hidden;
-        }
-
-        .book-cover {
-            max-width: 100%;
-            max-height: 210px;
-            object-fit: contain;
-        }
-
-        .no-cover {
-            color: #78909c;
-        }
-
-        .book h3 {
-            color: #354f52;
-            font-size: 17px;
-            line-height: 1.4;
-            min-height: 45px;
-        }
-
-        .book p {
-            font-size: 14px;
-            color: #455a64;
-            line-height: 1.6;
-        }
-
-        .category-label {
-            display: inline-block;
-            background: #e0ebe7;
-            color: #285943;
-            padding: 6px 10px;
-            border-radius: 15px;
-            font-size: 12px;
-        }
-
-        .recommendation-section {
-            background: #e9eee9;
-            padding: 22px;
-            border-radius: 15px;
-            margin-top: 35px;
-        }
-
-        .recommendation-section h2 {
-            color: #263238;
-            margin-top: 0;
-        }
-
-        .recommendation-section .book {
-            border: 1px solid #dce5df;
-        }
-
-        .empty-message {
-            background: white;
-            padding: 30px;
-            margin-top: 25px;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 45px;
-            padding: 20px;
-            color: #607d8b;
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 15px;
-            }
-
-            header h1 {
-                font-size: 28px;
-            }
-
-            input, select, button, .clear-button {
-                width: 100%;
-                text-align: center;
-            }
-
-            .search-form {
-                flex-direction: column;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -213,9 +365,28 @@
         <h1>📚 BookNest</h1>
         <p>Discover Your Next Favourite Book</p>
     </header>
+<section class="hero-section">
+    <div class="hero-content">
+        <span class="hero-tag">YOUR PERSONAL BOOK DISCOVERY SPACE</span>
 
-    <h2 class="section-title">Explore Books</h2>
+        <h2>Find Your Next<br>Favourite Story.</h2>
 
+        <p>
+            Explore thousands of books, discover new categories,
+            and find your next great read with smart recommendations.
+        </p>
+
+        <a href="#book-collection" class="hero-button">
+            Explore Books →
+        </a>
+    </div>
+
+    <div class="hero-decoration">
+        <span>📚</span>
+        <p>Read. Discover. Repeat.</p>
+    </div>
+</section>
+    <h2 class="section-title" id="book-collection">📖 Book Collection</h2>
     <form action="/" method="GET" class="search-form">
 
         <input
