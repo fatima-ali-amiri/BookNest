@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookNest | Smart Book Discovery System</title>
+    <meta name="description" content="BookNest is a smart book discovery and recommendation project built with Python, Flask and machine learning techniques.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f6ef;
+            color: #243c30;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #183e30;
+            color: white;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        header h2 {
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 90px 20px;
+            background: linear-gradient(135deg, #183e30, #32664c);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            font-size: 18px;
+        }
+
+        .buttons {
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 7px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+            background: #e7d9a8;
+            color: #183e30;
+        }
+
+        .btn.secondary {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+        }
+
+        section {
+            padding: 65px 8%;
+        }
+
+        section h2 {
+            font-size: 30px;
+            margin-bottom: 20px;
+            color: #183e30;
+        }
+
+        .stats, .features, .tech {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.06);
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #32664c;
+        }
+
+        .number {
+            font-size: 30px;
+            font-weight: bold;
+            color: #32664c;
+        }
+
+        .architecture {
+            background: #eae9df;
+        }
+
+        .flow {
+            background: white;
+            padding: 22px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        .arrow {
+            text-align: center;
+            font-size: 25px;
+            padding: 7px;
+            color: #32664c;
+        }
+
+        .project-links a {
+            color: #32664c;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #183e30;
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                justify-content: center;
+            }
+
+            nav a {
+                margin: 5px;
+                display: inline-block;
+            }
+
+            section {
+                padding: 45px 6%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2>📚 BookNest</h2>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#technology">Technology</a>
+        <a href="#architecture">Architecture</a>
+    </nav>
+</header>
+
+<div class="hero">
+    <h1>Discover Your Next Favourite Book</h1>
+    <p>
+        BookNest is a Smart Book Discovery System that helps readers
+        explore books, find similar titles, and save their favourites.
+    </p>
+
+    <div class="buttons">
+        <a class="btn" href="https://fat33maali112.pythonanywhere.com/" target="_blank">Visit Live Website</a>
+        <a class="btn secondary" href="https://github.com/fatima-ali-amiri/BookNest" target="_blank">View GitHub Project</a>
+    </div>
+</div>
+
+<section id="about">
+    <h2>About the Project</h2>
+    <p>
+        BookNest is a web-based academic project developed using Python
+        and Flask. It combines book data collection, data processing,
+        web development, and content-based recommendation techniques.
+        Its purpose is to make book discovery easier and more organized.
+    </p>
+
+    <div class="stats">
+        <div class="card">
+            <div class="number">1,000</div>
+            <p>Books Collected</p>
+        </div>
+        <div class="card">
+            <div class="number">0</div>
+            <p>Missing Values</p>
+        </div>
+        <div class="card">
+            <div class="number">0</div>
+            <p>Duplicate Records</p>
+        </div>
+        <div class="card">
+            <div class="number">38.05</div>
+            <p>Average Book Price</p>
+        </div>
+    </div>
+</section>
+
+<section id="features">
+    <h2>Key Features</h2>
+    <div class="features">
+        <div class="card">
+            <h3>🔎 Book Search</h3>
+            <p>Find books using their titles.</p>
+        </div>
+        <div class="card">
+            <h3>📂 Smart Filters</h3>
+            <p>Filter books by category, price, and rating.</p>
+        </div>
+        <div class="card">
+            <h3>📖 Book Details</h3>
+            <p>Explore individual book information and covers.</p>
+        </div>
+        <div class="card">
+            <h3>⭐ Favourites</h3>
+            <p>Save favourite books for later.</p>
+        </div>
+        <div class="card">
+            <h3>🤖 Recommendations</h3>
+            <p>Discover similar books using TF-IDF and cosine similarity.</p>
+        </div>
+        <div class="card">
+            <h3>🏆 Top Rated</h3>
+            <p>Explore highly rated books in the collection.</p>
+        </div>
+    </div>
+</section>
+
+<section id="technology">
+    <h2>Technologies Used</h2>
+    <div class="tech">
+        <div class="card">Python</div>
+        <div class="card">Flask</div>
+        <div class="card">BeautifulSoup</div>
+        <div class="card">Pandas</div>
+        <div class="card">Scikit-learn</div>
+        <div class="card">HTML & CSS</div>
+        <div class="card">CSV & JSON</div>
+        <div class="card">Git & GitHub</div>
+        <div class="card">PythonAnywhere</div>
+    </div>
+</section>
+
+<section class="architecture" id="architecture">
+    <h2>System Architecture</h2>
+
+    <div class="flow">👤 User</div>
+    <div class="arrow">↓</div>
+    <div class="flow">Frontend – HTML & CSS</div>
+    <div class="arrow">↓</div>
+    <div class="flow">Flask Backend</div>
+    <div class="arrow">↓</div>
+    <div class="flow">Book Dataset – CSV</div>
+    <div class="arrow">↓</div>
+    <div class="flow">Search, Filters & Recommendation Engine</div>
+    <div class="arrow">↓</div>
+    <div class="flow">Book Results & Recommendations</div>
+
+    <p style="text-align:center; margin-top:20px;">
+        Favourite books are stored separately using JSON.
+    </p>
+</section>
+
+<section>
+    <h2>Recommendation Approach</h2>
+    <div class="card">
+        <h3>TF-IDF + Cosine Similarity</h3>
+        <p>
+            BookNest represents book titles and categories as numerical
+            vectors using TF-IDF. Cosine similarity compares these vectors
+            to identify books with similar features. Category information
+            receives additional weight in the comparison.
+        </p>
+    </div>
+</section>
+
+<section>
+    <h2>Project Links</h2>
+    <div class="card project-links">
+        <p>🌐 <a href="https://fat33maali112.pythonanywhere.com/" target="_blank">Live BookNest Website</a></p>
+        <p>💻 <a href="https://github.com/fatima-ali-amiri/BookNest" target="_blank">GitHub Repository</a></p>
+        <p>👩‍💻 <a href="https://github.com/fatima-ali-amiri" target="_blank">Developer GitHub Profile</a></p>
+    </div>
+</section>
+
+<footer>
+    <h2 style="color:white;">Thank You!</h2>
+    <p>BookNest – Smart Book Discovery System</p>
+    <p>Developed as a BS Information Technology academic project.</p>
+    <p>Build • Learn • Grow 🌿</p>
+</footer>
+
+</body>
+</html>
+
