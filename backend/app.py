@@ -343,6 +343,73 @@ def home():
     )
 
 
+# PERSONALIZED BOOK DISCOVERY
+
+@app.route("/discover", methods=["GET", "POST"])
+def discover():
+
+    categories = sorted(
+        books_data["Category"].dropna().unique().tolist()
+    )
+
+    results = []
+    selected_categories = []
+    min_rating = 0
+    max_price = ""
+    ranking = "similarity"
+    submitted = False
+
+    if request.method == "POST":
+
+        submitted = True
+
+        selected_categories = request.form.getlist("categories")
+        selected_categories = [
+            category for category in selected_categories
+            if category in categories
+        ]
+
+        try:
+            min_rating = int(request.form.get("min_rating", 0))
+            if min_rating not in [0, 1, 2, 3, 4, 5]:
+                min_rating = 0
+        except ValueError:
+            min_rating = 0
+
+        try:
+            max_price = float(request.form.get("max_price", ""))
+            if max_price < 0:
+                max_price = ""
+        except ValueError:
+            max_price = ""
+
+        ranking = request.form.get("ranking", "similarity")
+
+        if ranking not in ["similarity", "rating", "value"]:
+            ranking = "similarity"
+
+        if selected_categories:
+            results = recommendation_model.recommend_by_preferences(
+                categories=selected_categories,
+                min_rating=min_rating,
+                max_price=max_price if max_price != "" else None,
+                ranking=ranking,
+                number=20
+            )
+
+    favourite_ids = load_favourites()
+
+    return render_template(
+        "discover.html",
+        categories=categories,
+        results=results,
+        selected_categories=selected_categories,
+        min_rating=min_rating,
+        max_price=max_price,
+        ranking=ranking,
+        favourite_ids=favourite_ids,
+        submitted=submitted
+    )
 # RUN APPLICATION
 
 if __name__ == "__main__":

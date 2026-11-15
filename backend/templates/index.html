@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -386,7 +387,18 @@
         <p>Read. Discover. Repeat.</p>
     </div>
 </section>
-    <h2 class="section-title" id="book-collection">📖 Book Collection</h2>
+    <section class="recommendation-section">
+    <h2>✨ Find Books Based on Your Interest</h2>
+    <p>
+        Choose your favourite genres, set your budget and rating
+        preferences, and let BookNest discover books that match
+        your interests.
+    </p>
+    <a href="{{ url_for('discover') }}" class="hero-button">
+        Personalize My Book Discovery →
+    </a>
+</section>
+<h2 class="section-title" id="book-collection">📖 Book Collection</h2>
     <form action="/" method="GET" class="search-form">
 
         <input
