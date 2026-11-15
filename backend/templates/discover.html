@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Discover Books | BookNest</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 25px;
+            background: #f7f5ef;
+            color: #263d32;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        header {
+            background: linear-gradient(120deg, #183d32, #315c49);
+            color: white;
+            padding: 35px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-family: Georgia, serif;
+            font-size: 34px;
+        }
+
+        header p {
+            line-height: 1.7;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 22px 0;
+            color: #315c49;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .panel {
+            background: white;
+            padding: 28px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #183d32;
+            font-family: Georgia, serif;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .category-option {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 12px;
+            background: #f4f7f2;
+            border: 1px solid #dfe8df;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .category-option input {
+            accent-color: #315c49;
+        }
+
+        .field {
+            margin-top: 22px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 9px;
+        }
+
+        select, input[type="number"] {
+            width: 100%;
+            max-width: 420px;
+            padding: 12px;
+            border: 1px solid #cbd8cd;
+            border-radius: 8px;
+            font-size: 15px;
+            background: white;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 14px 24px;
+            background: #244d3b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #183d32;
+        }
+
+        .books {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 20px;
+        }
+
+        .book {
+            background: white;
+            padding: 17px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .cover-area {
+            height: 220px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f4f5f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .book-cover {
+            max-width: 100%;
+            max-height: 210px;
+            object-fit: contain;
+        }
+
+        .book h3 {
+            font-family: Georgia, serif;
+            line-height: 1.4;
+        }
+
+        .book p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .reason {
+            color: #52745e;
+            font-size: 13px;
+            font-style: italic;
+        }
+
+        .details-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #315c49;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 35px;
+            background: #eaf0e9;
+            border-radius: 12px;
+        }
+
+        .favourite-form button {
+            width: 100%;
+            margin-top: 8px;
+            padding: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 45px;
+            padding: 20px;
+            color: #718176;
+            border-top: 1px solid #dfe5dc;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 14px;
+            }
+
+            header {
+                padding: 25px 15px;
+            }
+
+            .panel {
+                padding: 18px;
+            }
+
+            .books {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
+            }
+
+            .book {
+                padding: 11px;
+            }
+
+            .cover-area {
+                height: 175px;
+            }
+
+            .book-cover {
+                max-height: 165px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>✨ Find Books Based on Your Interest</h1>
+
+        <p>
+            Tell BookNest what you love reading.
+            Our ML recommendation system will discover matching books for you.
+        </p>
+    </header>
+
+    <a href="/" class="back-link">← Back to Home</a>
+
+    <section class="panel">
+
+        <h2>🎯 Customize Your Reading Preferences</h2>
+
+        <form action="/discover" method="POST">
+
+            <div class="field">
+                <label>Select Your Favourite Categories</label>
+
+                <div class="category-grid">
+
+                    {% for category in categories %}
+
+                        <label class="category-option">
+                            <input
+                                type="checkbox"
+                                name="categories"
+                                value="{{ category }}"
+                                {% if category in selected_categories %}checked{% endif %}
+                            >
+                            {{ category }}
+                        </label>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="min_rating">Minimum Book Rating</label>
+
+                <select name="min_rating" id="min_rating">
+
+                    <option value="0" {% if min_rating == 0 %}selected{% endif %}>
+                        Any Rating
+                    </option>
+
+                    {% for rating in range(1, 6) %}
+                        <option
+                            value="{{ rating }}"
+                            {% if min_rating == rating %}selected{% endif %}
+                        >
+                            {{ rating }} Stars & Above
+                        </option>
+                    {% endfor %}
+
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="max_price">Maximum Budget (£)</label>
+
+                <input
+                    type="number"
+                    name="max_price"
+                    id="max_price"
+                    min="0"
+                    step="0.01"
+                    placeholder="Example: 40"
+                    value="{{ max_price }}"
+                >
+            </div>
+
+            <div class="field">
+                <label for="ranking">Recommendation Style</label>
+
+                <select name="ranking" id="ranking">
+
+                    <option value="similarity"
+                        {% if ranking == 'similarity' %}selected{% endif %}>
+                        Most Relevant to My Interests
+                    </option>
+
+                    <option value="rating"
+                        {% if ranking == 'rating' %}selected{% endif %}>
+                        Highest Rated
+                    </option>
+
+                    <option value="value"
+                        {% if ranking == 'value' %}selected{% endif %}>
+                        Best Rating for Price
+                    </option>
+
+                </select>
+            </div>
+
+            <button type="submit">
+                ✨ Discover My Books
+            </button>
+
+        </form>
+
+    </section>
+
+    {% if submitted %}
+
+        <section class="panel">
+
+            <h2>📚 Your Personalized Recommendations</h2>
+
+            <p>
+                We found {{ results|length }} matching books for your preferences.
+            </p>
+
+            {% if results %}
+
+                <div class="books">
+
+                    {% for book in results %}
+
+                        <div class="book">
+
+                            <div class="cover-area">
+
+                                {% if book["Image_URL"] %}
+                                    <img
+                                        src="{{ book['Image_URL'] }}"
+                                        alt="{{ book['Title'] }}"
+                                        class="book-cover"
+                                        loading="lazy"
+                                    >
+                                {% else %}
+                                    <span>Cover not available</span>
+                                {% endif %}
+
+                            </div>
+
+                            <h3>{{ book["Title"] }}</h3>
+
+                            <p>
+                                <strong>Category:</strong>
+                                {{ book["Category"] }}
+                            </p>
+
+                            <p>
+                                <strong>Rating:</strong>
+                                {{ book["Rating"] }}
+                            </p>
+
+                            <p>
+                                <strong>Price:</strong>
+                                {{ book["Price"] }}
+                            </p>
+
+                            <p>
+                                <strong>Interest Match:</strong>
+                                {{ "%.1f"|format(book["Similarity_Score"] * 100) }}%
+                            </p>
+
+                            <p class="reason">
+                                {{ book["Why_Recommended"] }}
+                            </p>
+
+                            <form
+                                action="{{ url_for('toggle_favourite', book_id=book['Book_ID']) }}"
+                                method="POST"
+                                class="favourite-form"
+                            >
+                                {% if book["Book_ID"] in favourite_ids %}
+                                    <button type="submit" style="background:#a83250;">
+                                        ❤️ Remove Favourite
+                                    </button>
+                                {% else %}
+                                    <button type="submit">
+                                        🤍 Add to Favourites
+                                    </button>
+                                {% endif %}
+                            </form>
+
+                            <a
+                                href="{{ url_for('book_details', book_id=book['Book_ID']) }}"
+                                class="details-link"
+                            >
+                                View Details →
+                            </a>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-message">
+                    <h3>No Matching Books Found</h3>
+                    <p>
+                        Try selecting more categories or changing your
+                        rating and budget preferences.
+                    </p>
+                </div>
+
+            {% endif %}
+
+        </section>
+
+    {% endif %}
+
+    <footer>
+        © 2026 BookNest | Smart Book Discovery System
+    </footer>
+
+</div>
+
+</body>
+</html>
